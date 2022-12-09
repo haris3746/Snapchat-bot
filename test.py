@@ -6,17 +6,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 import logging
 import warnings
 import time
-import chromedriver_autoinstaller
+import undetected_chromedriver as uc
 import re
 from pymongo import MongoClient
 
 warnings.filterwarnings("ignore")
 
-path_chrome = chromedriver_autoinstaller.install()
-options = Options()
+options = uc.ChromeOptions()
 options.add_argument('--headless')
-options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(executable_path=path_chrome, options=options)
+driver = uc.Chrome(options=options)
 driver.maximize_window()
 
 cluster = MongoClient(
