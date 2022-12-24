@@ -134,6 +134,7 @@ try:
 
 
 except:
+    logging.exception('msg')
 
     driver.quit()
 
