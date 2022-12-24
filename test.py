@@ -24,7 +24,7 @@ collection = db["initial"]
 
 initial_data = list(collection.find())
 n = len(initial_data)
-print(initial_data)
+#print(initial_data)
 url = initial_data[n-1]['url']
 count = [1] * len(url)
 set0 = [0] * len(url)
@@ -47,6 +47,7 @@ try:
         temp0[i] = initial_data[n-1]['ini_vcount'][i]
         sub0[i] = initial_data[n-1]['ini_sub'][i]
         count[i] = 1
+        print(url[i])
         driver.get(url[i])
         time.sleep(4)
         print("Channel Name : ", driver.find_element(By.XPATH,
