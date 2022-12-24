@@ -136,8 +136,11 @@ try:
 
 except:
     logging.exception('msg')
+    continue
+    
 
-    driver.quit()
+    
+driver.quit()
 
 
 ini_post = {"url": url, "channel": c_name, "ini_sub": initial_sub, "ini_vcount": initial_vidcount}
