@@ -24,7 +24,7 @@ collection = db["initial"]
 
 initial_data = list(collection.find())
 n = len(initial_data)
-#print(initial_data)
+print(initial_data)
 url = initial_data[n-1]['url']
 count = [1] * len(url)
 set0 = [0] * len(url)
