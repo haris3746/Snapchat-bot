@@ -50,7 +50,8 @@ try:
         print(url[i])
         driver.get(url[i])
         time.sleep(4)
-        print("Channel Name : ", driver.find_element(By.XPATH,
+        try:
+             print("Channel Name : ", driver.find_element(By.XPATH,
                                                      "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[1]/a/h1/div/span").text)
 
         c_name[i] = driver.find_element(By.XPATH,
@@ -59,6 +60,9 @@ try:
                                   "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text)
         t = driver.find_element(By.XPATH,
                                 "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text
+        except:
+            continue
+       
         res = re.sub(r'[^a-zA-Z]', '', t)
         # print(res)
         num = re.findall(r'\d+(?:\.\d+)?', t)
@@ -136,8 +140,7 @@ try:
 
 except:
     logging.exception('msg')
-    continue
-    
+
 
     
 driver.quit()
