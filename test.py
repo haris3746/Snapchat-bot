@@ -51,15 +51,15 @@ try:
         driver.get(url[i])
         time.sleep(4)
         try:
-             print("Channel Name : ", driver.find_element(By.XPATH,
-                                                     "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[1]/a/h1/div/span").text)
-
-        c_name[i] = driver.find_element(By.XPATH,
-                                        "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[1]/a/h1/div/span").text
-        print(driver.find_element(By.XPATH,
-                                  "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text)
-        t = driver.find_element(By.XPATH,
-                                "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text
+            print("Channel Name : ", driver.find_element(By.XPATH,
+                                                         "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[1]/a/h1/div/span").text)
+            c_name[i] = driver.find_element(By.XPATH,
+                                            "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[1]/a/h1/div/span").text
+            print(driver.find_element(By.XPATH,
+                              "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text)
+            t = driver.find_element(By.XPATH,
+                            "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text
+           
         except:
             continue
        
