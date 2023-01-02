@@ -24,8 +24,8 @@ collection = db["initial"]
 
 initial_data = list(collection.find())
 n = len(initial_data)
-#print(initial_data)
-url = initial_data[n-1]['url']
+# print(initial_data)
+url = initial_data[n - 1]['url']
 count = [1] * len(url)
 set0 = [0] * len(url)
 sub0 = [0] * len(url)
@@ -37,6 +37,7 @@ diff_vidcount = [0] * len(url)
 initial_sub = [0] * len(url)
 diff_sub = [0] * len(url)
 last_vid = [""] * len(url)
+thumbnail = [""] * len(url)
 c_name = [""] * len(url)
 
 out_count = 0
@@ -44,8 +45,8 @@ out_count = 0
 try:
 
     for i in range(0, len(url)):
-        temp0[i] = initial_data[n-1]['ini_vcount'][i]
-        sub0[i] = initial_data[n-1]['ini_sub'][i]
+        temp0[i] = initial_data[n - 1]['ini_vcount'][i]
+        sub0[i] = initial_data[n - 1]['ini_sub'][i]
         count[i] = 1
         print(url[i])
         driver.get(url[i])
@@ -56,13 +57,13 @@ try:
             c_name[i] = driver.find_element(By.XPATH,
                                             "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[1]/a/h1/div/span").text
             print(driver.find_element(By.XPATH,
-                              "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text)
+                                      "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text)
             t = driver.find_element(By.XPATH,
-                            "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text
-           
+                                    "/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[1]/div/div[1]/div/div/div/div[3]/div").text
+
         except:
             continue
-       
+
         res = re.sub(r'[^a-zA-Z]', '', t)
         # print(res)
         num = re.findall(r'\d+(?:\.\d+)?', t)
@@ -112,6 +113,9 @@ try:
         last_vid[i] = driver.find_element(By.XPATH,
                                           '/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[3]/div[3]/div[' + str(
                                               count1[i]) + ']/div[2]/h4/span').text
+        thumbnail[i] = driver.find_element(By.XPATH,
+                                           '/html/body/div/div[1]/main/div[2]/div/div[2]/div/div[3]/div[3]/div[' + str(
+                                               count1[i]) + ']/div[1]/img').get_attribute('src')
 
         time.sleep(2)
         # driver.quit()
@@ -141,10 +145,7 @@ try:
 except:
     logging.exception('msg')
 
-
-    
 driver.quit()
-
 
 ini_post = {"url": url, "channel": c_name, "ini_sub": initial_sub, "ini_vcount": initial_vidcount}
 print(ini_post)
@@ -153,7 +154,7 @@ cluster = MongoClient(
 db = cluster["snapchat"]
 collection = db["initial"]
 collection.insert_one(ini_post)
-post = {"channel": c_name, "url": url, "last_video": last_vid, "diff_sub": diff_sub, "diff_vcount": diff_vidcount}
+post = {"channel": c_name, "url": url, "last_video": last_vid, "diff_sub": diff_sub, "diff_vcount": diff_vidcount, "thumbnail": thumbnail}
 print(post)
 cluster = MongoClient(
     "mongodb+srv://user1:yes321@cluster0.m6tusxx.mongodb.net/?retryWrites=true&w=majority")
