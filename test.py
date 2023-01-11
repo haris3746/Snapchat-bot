@@ -14,11 +14,31 @@ import chromedriver_autoinstaller
 
 warnings.filterwarnings("ignore")
 
-options = uc.ChromeOptions()
-options.add_argument('--headless')
-path_chrome = chromedriver_autoinstaller.install()
+def driverInit():
+    option = uc.ChromeOptions()
+    useragentstr = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+    option.add_argument("--log-level=3")
+    option.add_argument("--disable-infobars")
+    option.add_argument("--disable-extensions")
+    option.add_argument("--headless")
+    prefs = {"credentials_enable_service": False,
+             "profile.password_manager_enabled": False,
+             "profile.default_content_setting_values.notifications": 2
+             }
+    option.add_experimental_option("prefs", prefs)
 
-driver = uc.Chrome(executable_path=path_chrome, options=options)
+    option.add_argument(f"user-agent={useragentstr}")
+    driverr = uc.Chrome(options=option)
+    return driverr
+
+
+
+#options = uc.ChromeOptions()
+#options.add_argument('--headless')
+#path_chrome = chromedriver_autoinstaller.install()
+
+#driver = uc.Chrome(executable_path=path_chrome, options=options)
+driver = driverInit()
 driver.maximize_window()
 
 cluster = MongoClient(
