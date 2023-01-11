@@ -9,12 +9,16 @@ import time
 import undetected_chromedriver as uc
 import re
 from pymongo import MongoClient
+import chromedriver_autoinstaller
+
 
 warnings.filterwarnings("ignore")
 
 options = uc.ChromeOptions()
 options.add_argument('--headless')
-driver = uc.Chrome(options=options)
+path_chrome = chromedriver_autoinstaller.install()
+
+driver = uc.Chrome(executable_path=path_chrome, options=options)
 driver.maximize_window()
 
 cluster = MongoClient(
