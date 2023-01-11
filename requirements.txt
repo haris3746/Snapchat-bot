@@ -1,3 +1,4 @@
 selenium
 undetected-chromedriver 
 pymongo
+chromedriver-autoinstaller
